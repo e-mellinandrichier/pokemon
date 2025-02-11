@@ -93,11 +93,28 @@ class Combat:
         return action
 
     def calculate_damage(self, attacker, defender):
+        
         type_chart = {
-            'eau': {'eau': 1, 'feu': 2, 'terre': 0.5, 'normal': 1},
-            'feu': {'eau': 0.5, 'feu': 1, 'terre': 2, 'normal': 1},
-            'terre': {'eau': 2, 'feu': 0.5, 'terre': 1, 'normal': 1},
-            'normal': {'eau': 0.75, 'feu': 0.75, 'terre': 0.75, 'normal': 1}
+            'normal': {'normal': 1, 'plante': 1, 'feu': 1, 'eau': 1, 'electrik': 1, 'glace': 1, 'combat': 1, 'poison': 1, 'sol': 1, 'vol': 1, 'psy': 1, 'insecte': 1, 'roche': 0.5, 'spectre': 0, 'dragon': 1, 'tenebres': 1, 'acier': 0.5, 'fee': 1},
+            'plante': {'normal': 1, 'plante': 0.5, 'feu': 0.5, 'eau': 2, 'electrik': 1, 'glace': 1, 'combat': 1, 'poison': 0.5, 'sol': 2, 'vol': 0.5, 'psy': 1, 'insecte': 0.5, 'roche': 2, 'spectre': 1, 'dragon': 0.5, 'tenebres': 1, 'acier': 0.5, 'fee': 1},
+            'feu': {'normal': 1, 'plante': 2, 'feu': 0.5, 'eau': 0.5, 'electrik': 1, 'glace': 2, 'combat': 1, 'poison': 1, 'sol': 1, 'vol': 1, 'psy': 1, 'insecte': 2, 'roche': 0.5, 'spectre': 1, 'dragon': 0.5, 'tenebres': 1, 'acier': 2, 'fee': 1},
+            'eau': {'normal': 1, 'plante': 0.5, 'feu': 2, 'eau': 0.5, 'electrik': 1, 'glace': 1, 'combat': 1, 'poison': 1, 'sol': 2, 'vol': 1, 'psy': 1, 'insecte': 1, 'roche': 2, 'spectre': 1, 'dragon': 0.5, 'tenebres': 1, 'acier': 1, 'fee': 1},
+            'electrik': {'normal': 1, 'plante': 0.5, 'feu': 1, 'eau': 2, 'electrik': 0.5, 'glace': 1, 'combat': 1, 'poison': 1, 'sol': 0, 'vol': 2, 'psy': 1, 'insecte': 1, 'roche': 1, 'spectre': 1, 'dragon': 0.5, 'tenebres': 1, 'acier': 1, 'fee': 1},
+            'glace': {'normal': 1, 'plante': 2, 'feu': 0.5, 'eau': 0.5, 'electrik': 1, 'glace': 0.5, 'combat': 1, 'poison': 1, 'sol': 2, 'vol': 2, 'psy': 1, 'insecte': 1, 'roche': 1, 'spectre': 1, 'dragon': 2, 'tenebres': 1, 'acier': 0.5, 'fee': 1},
+            'combat': {'normal': 2, 'plante': 1, 'feu': 1, 'eau': 1, 'electrik': 1, 'glace': 2, 'combat': 1, 'poison': 0.5, 'sol': 1, 'vol': 0.5, 'psy': 0.5, 'insecte': 0.5, 'roche': 2, 'spectre': 0, 'dragon': 1, 'tenebres': 2, 'acier': 2, 'fee': 0.5},
+            'poison': {'normal': 1, 'plante': 2, 'feu': 1, 'eau': 1, 'electrik': 1, 'glace': 1, 'combat': 1, 'poison': 0.5, 'sol': 0.5, 'vol': 1, 'psy': 1, 'insecte': 1, 'roche': 0.5, 'spectre': 0.5, 'dragon': 1, 'tenebres': 1, 'acier': 0, 'fee': 2},
+            'sol': {'normal': 1, 'plante': 0.5, 'feu': 2, 'eau': 1, 'electrik': 2, 'glace': 1, 'combat': 1, 'poison': 2, 'sol': 1, 'vol': 0, 'psy': 1, 'insecte': 0.5, 'roche': 2, 'spectre': 1, 'dragon': 1, 'tenebres': 1, 'acier': 2, 'fee': 1},
+            'vol': {'normal': 1, 'plante': 2, 'feu': 1, 'eau': 1, 'electrik': 0.5, 'glace': 1, 'combat': 2, 'poison': 1, 'sol': 1, 'vol': 1, 'psy': 1, 'insecte': 2, 'roche': 0.5, 'spectre': 1, 'dragon': 1, 'tenebres': 1, 'acier': 0.5, 'fee': 1},
+            'psy': {'normal': 1, 'plante': 1, 'feu': 1, 'eau': 1, 'electrik': 1, 'glace': 1, 'combat': 2, 'poison': 2, 'sol': 1, 'vol': 1, 'psy': 0.5, 'insecte': 1, 'roche': 1, 'spectre': 1, 'dragon': 1, 'tenebres': 0, 'acier': 0.5, 'fee': 1},
+            'insecte': {'normal': 1, 'plante': 2, 'feu': 0.5, 'eau': 1, 'electrik': 1, 'glace': 1, 'combat': 0.5, 'poison': 0.5, 'sol': 1, 'vol': 0.5, 'psy': 2, 'insecte': 1, 'roche': 1, 'spectre': 0.5, 'dragon': 1, 'tenebres': 2, 'acier': 0.5, 'fee': 0.5},
+            'roche': {'normal': 1, 'plante': 1, 'feu': 1, 'eau': 1, 'electrik': 1, 'glace': 2, 'combat': 0.5, 'poison': 1, 'sol': 0.5, 'vol': 2, 'psy': 1, 'insecte': 2, 'roche': 1, 'spectre': 1, 'dragon': 1, 'tenebres': 1, 'acier': 0.5, 'fee': 1},
+            'spectre': {'normal': 0, 'plante': 1, 'feu': 1, 'eau': 1, 'electrik': 1, 'glace': 1, 'combat': 1, 'poison': 1, 'sol': 1, 'vol': 1, 'psy': 2, 'insecte': 1, 'roche': 1, 'spectre': 2, 'dragon': 1, 'tenebres': 0.5, 'acier': 1, 'fee': 1},
+            'dragon': {'normal': 1, 'plante': 1, 'feu': 1, 'eau': 1, 'electrik': 1, 'glace': 1, 'combat': 1, 'poison': 1, 'sol': 1, 'vol': 1, 'psy': 1, 'insecte': 1, 'roche': 1, 'spectre': 1, 'dragon': 2, 'tenebres': 1, 'acier': 0.5, 'fee': 0},
+            'tenebres': {'normal': 1, 'plante': 1, 'feu': 1, 'eau': 1, 'electrik': 1, 'glace': 1, 'combat': 0.5, 'poison': 1, 'sol': 1, 'vol': 1, 'psy': 2, 'insecte': 1, 'roche': 1, 'spectre': 2, 'dragon': 1, 'tenebres': 0.5, 'acier': 1, 'fee': 0.5},
+            'acier': {'normal': 1, 'plante': 0.5, 'feu': 0.5, 'eau': 1, 'electrik': 0.5, 'glace': 2, 'combat': 1, 'poison': 1, 'sol': 1, 'vol': 1, 'psy': 1, 'insecte': 1, 'roche': 2, 'spectre': 1, 'dragon': 1, 'tenebres': 1, 'acier': 0.5, 'fee': 2},
+            'fee': {'normal': 1, 'plante': 0.5, 'feu': 1, 'eau': 1, 'electrik': 1, 'glace': 1, 'combat': 1, 'poison': 2, 'sol': 0.5, 'vol': 1, 'psy': 1, 'insecte': 1, 'roche': 1, 'spectre': 1, 'dragon': 2, 'tenebres': 2, 'acier': 0.5, 'fee': 1}
+
+            # 'feu': {'normal': 1, 'plante': 1, 'feu': 1, 'eau': 1, 'electrik': 1, 'glace': 1, 'combat': 1, 'poison': 1, 'sol': 1, 'vol': 1, 'psy': 1, 'insecte': 1, 'roche': 1, 'spectre': 1, 'dragon': 1, 'tenebres': 1, 'acier': 1, 'fee': 1}
         }
 
         multiplier = 1
@@ -106,7 +123,7 @@ class Combat:
                 multiplier *= type_chart.get(attack_type.lower(), {}).get(defense_type.lower(), 1)
 
         damage = attacker.attack * multiplier - defender.defense/2
-        return max(0, int(damage))
+        return max(10, int(damage))
 
     def start(self):
         self.combat_active = True
