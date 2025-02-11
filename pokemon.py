@@ -1,38 +1,15 @@
-import time
-
-class Pokemon():
-    def __init__(self, typ, name, PV, attaque, defense, niveau):
-        self.type = typ
+class Pokemon:
+    def __init__(self, name, hp, level, attack, defense, types):
         self.name = name
-        self.PV = PV
-        self.attaque = attaque
+        self.max_hp = hp
+        self.hp = hp
+        self.level = level
+        self.attack = attack
         self.defense = defense
-        self.niveau = niveau
+        self.types = types
 
-class Combat():
-    def __init__(self, joueur1, joueur2):
-        self.poke1 = poke1
-        self.poke2 = poke2
+    def take_damage(self, damage):
+        self.hp = max(0, self.hp - damage)
 
-    def infos(self):
-        poke1type = poke1.type
-        poke2type = poke2.type
-
-    def attaque(self):
-        poke1.PV -= poke2.PV 
-
-    def pokegagnant(self, p):
-        return p.name
-
-    def 
-
-
-class Pokedex():
-    def __init__(self):
-        self.name
-
-p1 = Pokemon("feu", "ponyta", 40, 10, 10, 4)
-p2 = Pokemon("eau", "grenousse", 60, 20, 10, 8)
-
-c1 = Combat()
-c1.infos(p1, p2)
+    def is_fainted(self):
+        return self.hp <= 0

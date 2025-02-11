@@ -1,0 +1,6 @@
+[
+    {"name": "Pikachu", "hp": 35, "level": 5, "attack": 55, "defense": 30, "types": ["normal"]},
+    {"name": "Bulbasaur", "hp": 45, "level": 5, "attack": 49, "defense": 49, "types": ["plante", "poison"]},
+    {"name": "Charmander", "hp": 39, "level": 5, "attack": 52, "defense": 43, "types": ["feu"]},
+    {"name": "Squirtle", "hp": 44, "level": 5, "attack": 48, "defense": 65, "types": ["eau"]}
+]
