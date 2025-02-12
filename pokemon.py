@@ -1,5 +1,5 @@
 class Pokemon:
-    def __init__(self, name, hp, level, attack, defense, types):
+    def __init__(self, name, hp, level, attack, defense, types, image):
         self.name = name
         self.max_hp = hp
         self.hp = hp
@@ -7,6 +7,7 @@ class Pokemon:
         self.attack = attack
         self.defense = defense
         self.types = types
+        self.image = image
 
     def take_damage(self, damage):
         self.hp = max(0, self.hp - damage)

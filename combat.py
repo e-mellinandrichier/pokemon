@@ -17,7 +17,9 @@ class Combat:
             
         # Initialisation des Pokémon
         self.player_pokemon = None
+        self.player_pokemon_img = None
         self.enemy_pokemon = None
+        self.enemy_pokemon_img = None
         self.combat_active = False
         self.message = ""
         self.message_timer = 0
@@ -68,9 +70,13 @@ class Combat:
             self.screen.fill((255, 255, 255))  # Fond blanc
             
             # Dessiner les Pokémon
+            player_pokemon_img = pygame.image.load(self.player_pokemon.image)
             self.screen.blit(self.font.render(f"Player: {self.player_pokemon.name}", True, (0, 0, 0)), (50, 50))
+            self.screen.blit(player_pokemon_img, (50, 250))
             self.draw_health_bar(self.player_pokemon, 50, 80)  # Barre de vie du joueur
             
+            enemy_pokemon_img = pygame.image.load(self.enemy_pokemon.image)
+            self.screen.blit(enemy_pokemon_img, (500, 50))
             self.screen.blit(self.font.render(f"Enemy: {self.enemy_pokemon.name}", True, (0, 0, 0)), (500, 50))
             self.draw_health_bar(self.enemy_pokemon, 500, 80)  # Barre de vie de l'ennemi
             
@@ -122,7 +128,7 @@ class Combat:
             for defense_type in defender.types:
                 multiplier *= type_chart.get(attack_type.lower(), {}).get(defense_type.lower(), 1)
 
-        damage = attacker.attack * multiplier - defender.defense/2
+        damage = attacker.attack * multiplier - defender.defense
         return max(10, int(damage))
 
     def start(self):
@@ -130,7 +136,10 @@ class Combat:
         
         # Sélection du Pokémon
         self.player_pokemon = Pokemon(**random.choice(self.pokemon_list))
+        # self.player_pokemon_img = self.player_pokemon.image
         self.enemy_pokemon = Pokemon(**random.choice(self.pokemon_list))
+        # self.enemy_pokemon_img = self.enemy_pokemon.image
+
         
         self.show_message(f"Un {self.enemy_pokemon.name} sauvage apparaît!", 2000)
 
@@ -150,8 +159,14 @@ class Combat:
                 # Mettre à jour l'affichage avant de passer à la contre-attaque
                 self.screen.fill((255, 255, 255))
                 self.screen.blit(self.font.render(f"Player: {self.player_pokemon.name}", True, (0, 0, 0)), (50, 50))
+                player_pokemon_img = pygame.image.load(self.player_pokemon.image)
+                self.screen.blit(player_pokemon_img, (50, 250))
+                
                 self.draw_health_bar(self.player_pokemon, 50, 80)
                 self.screen.blit(self.font.render(f"Enemy: {self.enemy_pokemon.name}", True, (0, 0, 0)), (500, 50))
+                enemy_pokemon_img = pygame.image.load(self.enemy_pokemon.image)
+                self.screen.blit(enemy_pokemon_img, (500, 50))
+
                 self.draw_health_bar(self.enemy_pokemon, 500, 80)
                 for btn in self.buttons:
                     self.draw_button(btn["rect"], btn["text"])
@@ -177,8 +192,14 @@ class Combat:
                 self.screen.fill((255, 255, 255))
                 self.screen.blit(self.font.render(f"Player: {self.player_pokemon.name}", True, (0, 0, 0)), (50, 50))
                 self.draw_health_bar(self.player_pokemon, 50, 80)
+                player_pokemon_img = pygame.image.load(self.player_pokemon.image)
+                self.screen.blit(player_pokemon_img, (50, 250))
+
                 self.screen.blit(self.font.render(f"Enemy: {self.enemy_pokemon.name}", True, (0, 0, 0)), (500, 50))
                 self.draw_health_bar(self.enemy_pokemon, 500, 80)
+                enemy_pokemon_img = pygame.image.load(self.enemy_pokemon.image)
+                self.screen.blit(enemy_pokemon_img, (500, 50))
+                
                 for btn in self.buttons:
                     self.draw_button(btn["rect"], btn["text"])
                 text_surf = self.font.render(f"{self.enemy_pokemon.name} contre-attaque pour {damage} dégâts!", True, (0, 0, 0))
