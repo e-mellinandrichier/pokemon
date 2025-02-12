@@ -1,0 +1,131 @@
+[
+    {
+        "nom": "Apitrini",
+        "type": "Insecte",
+        "vie": 30,
+        "attaque": 30,
+        "defense": 42,
+        "sprite": "sprite/apitrini.png"
+    },
+    {
+        "nom": "Abra",
+        "type": "Psy",
+        "vie": 25,
+        "attaque":20,
+        "defense": 15,
+        "sprite": "sprite/abra.png"
+    },
+    {
+        "nom": "Coupenotte",
+        "type": "Dragon",
+        "vie": 46,
+        "attaque": 87,
+        "defense": 60,
+        "sprite": "sprite/coupenotte.png"
+    },
+    {
+        "nom": "Eevee",
+        "type": "Normal",
+        "vie": 55,
+        "attaque": 55,
+        "defense": 50,
+        "sprite": "sprite/eevee.png"
+    },
+    {
+        "nom": "Germignon",
+        "type": "Plante",
+        "vie": 45,
+        "attaque": 49,
+        "defense": 65,
+        "sprite": "sprite/germignon.png"
+    },
+    {
+        "nom": "Kicklee",
+        "type": "Combat",
+        "vie": 50,
+        "attaque": 120,
+        "defense": 53,
+        "sprite": "sprite/kicklee.png"
+    },
+    {
+        "nom": "Poichigeon",
+        "type": "Vol",
+        "vie": 50,
+        "attaque": 55,
+        "defense": 50,
+        "sprite": "sprite/poichigeon.png"
+    },
+    {
+        "nom": "Polarhume",
+        "type": "Glace",
+        "vie": 55,
+        "attaque": 70,
+        "defense": 40,
+        "sprite": "sprite/polarhume.png"
+    },
+    {
+        "nom": "Racaillou",
+        "type": "Roche",
+        "vie": 40,
+        "attaque": 80,
+        "defense": 100,
+        "sprite": "sprite/racaillou.png"
+    },
+    {
+        "nom": "Rondoudou",
+        "type": "Fée",
+        "vie": 115,
+        "attaque": 45,
+        "defense": 20,
+        "sprite": "sprite/rondoudou.png"
+    },
+    {
+        "nom": "Sabelette",
+        "type": "Roche",
+        "vie": 50,
+        "attaque": 75,
+        "defense": 85,
+        "sprite": "sprite/sabelette.png"
+    },
+    {
+        "nom": "Salameche",
+        "type": "Feu",
+        "vie": 39,
+        "attaque": 52,
+        "defense": 43,
+        "sprite": "sprite/salameche.png"
+    },
+    {
+        "nom": "Smogo",
+        "type": "Poison",
+        "vie": 40,
+        "attaque": 65,
+        "defense": 95,
+        "sprite": "sprite/smogo.png"
+    },
+    {
+        "nom": "Tenefixe",
+        "type": "Spectre",
+        "vie": 50,
+        "attaque": 75,
+        "defense": 75,
+        "sprite": "sprite/tenefixe.png"
+    },
+    {
+        "nom": "Tic",
+        "type": "Acier",
+        "vie": 40,
+        "attaque": 55,
+        "defense": 70,
+        "sprite": "sprite/tic.png"
+    },
+    {
+        "nom": "Wattwatt",
+        "type": "Elec",
+        "vie": 55,
+        "attaque": 40,
+        "defense": 40,
+        "sprite": "sprite/wattwatt.png"
+    }
+
+]
