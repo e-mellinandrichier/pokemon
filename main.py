@@ -1,7 +1,9 @@
 import pygame
 import sys
+import json
 from combat import Combat
-# from pokedex import Pokedex
+
+from pokedex import Pokedex
 
 # Initialisation de Pygame
 pygame.init()
@@ -44,8 +46,8 @@ def main_menu():
                     combat = Combat(screen)
                     result = combat.start()
                 elif event.key == pygame.K_2:
-                    # Ajouter un Pokémon
-                    pass
+                    pokedex = Pokedex()
+                    result = pokedex.show()
                 elif event.key == pygame.K_3:
                     pokedex = Pokedex()
                     pokedex.show()

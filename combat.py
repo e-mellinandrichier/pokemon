@@ -166,7 +166,7 @@ class Combat:
                 self.screen.blit(self.font.render(f"Enemy: {self.enemy_pokemon.name}", True, (0, 0, 0)), (500, 50))
                 enemy_pokemon_img = pygame.image.load(self.enemy_pokemon.image)
                 self.screen.blit(enemy_pokemon_img, (500, 50))
-
+                
                 self.draw_health_bar(self.enemy_pokemon, 500, 80)
                 for btn in self.buttons:
                     self.draw_button(btn["rect"], btn["text"])
