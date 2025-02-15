@@ -25,7 +25,7 @@ class Pokedex():
             y = 100
             grid_columns = 6
             grid_rows = 2
-            image_width = 100  
+            image_width = 100
             image_height = 100
             pokedex = self.load_pokemons()
             for p in pokedex:
@@ -39,3 +39,9 @@ class Pokedex():
                     if index < len(images):
                         screen.blit(images[index], (x, y))
             pygame.display.flip()
+
+# au lancement du jeu, on sélectionne un des pokemon pour combattre avec
+# afficher tous les pokemon du pokedex qui sont déselectionnés 
+# selctionne les pokemon
+# retourne une deuxième liste contenant uniquement les pokemon séléctionnés
+# sur cette liste -> qu'on fait le random sur le opponent pokemon

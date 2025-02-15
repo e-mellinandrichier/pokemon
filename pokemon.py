@@ -1,3 +1,7 @@
+import pygame
+
+pygame.init()
+
 class Pokemon:
     def __init__(self, name, hp, level, attack, defense, types, image):
         self.name = name
@@ -8,6 +12,9 @@ class Pokemon:
         self.defense = defense
         self.types = types
         self.image = image
+        self.assets = pygame.image.load(image)
+        # self.assets = pygame.transform.scale(self.assets, (180, 180))
+        self.rect = self.assets.get_rect()
 
     def take_damage(self, damage):
         self.hp = max(0, self.hp - damage)

@@ -3,6 +3,7 @@ import random
 import json
 import time
 from pokemon import Pokemon
+from pokedex import Pokedex
 
 class Combat:
     def __init__(self, screen):
@@ -21,6 +22,7 @@ class Combat:
         self.enemy_pokemon = None
         self.enemy_pokemon_img = None
         self.combat_active = False
+        self.selection = False
         self.message = ""
         self.message_timer = 0
         self.buttons = [
@@ -131,16 +133,74 @@ class Combat:
         damage = attacker.attack * multiplier - defender.defense
         return max(10, int(damage))
 
+    def load_pokemons(self):
+        with open('pokedex.json', 'r') as f:
+            return json.load(f)
+
+    def display_pokemons(self, pokedex):
+        pokemon_list = []
+        space_x = 150
+        space_y = 150
+        origin_x = 50
+        origin_y = 100
+        pokemons_per_line = 6  # Fixed typo "lign" to "line"
+
+        self.screen.fill((255, 255, 255))
+        self.show_message("Sélectionner un Pokémon :")
+
+        # Single loop through each Pokémon
+        for i, p in enumerate(pokedex):
+            # Create Pokémon instance using current item 'p'
+            pokemon = Pokemon(
+                p["name"], p["hp"], p["level"], 
+                p["attack"], p["defense"], p["types"], p["image"]
+            )
+            
+            # Calculate grid position based on index 'i'
+            column = i % pokemons_per_line
+            row = i // pokemons_per_line
+            x = origin_x + column * space_x
+            y = origin_y + row * space_y
+            
+            pokemon.rect.topleft = (x, y)
+            # Blit the Pokémon at calculated position
+            self.screen.blit(pokemon.assets, (x, y))
+            pokemon_list.append(pokemon)
+
+        pygame.display.flip()
+        return pokemon_list
+
+    def run_selection_screen(self):
+        """Handles Pokémon selection screen"""
+        selection_active = True
+        pokedex = self.load_pokemons()
+        displayed_pokemons = self.display_pokemons(pokedex)
+        
+        while selection_active:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    exit()
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_pos = pygame.mouse.get_pos()
+                    for pokemon in displayed_pokemons:
+                        if pokemon.rect.collidepoint(mouse_pos):
+                            return pokemon  # Return selected Pokémon
+            
+            pygame.display.flip()
+            self.clock.tick(30)
+        
+        return None
+
     def start(self):
         self.combat_active = True
-        
-        # Sélection du Pokémon
-        self.player_pokemon = Pokemon(**random.choice(self.pokemon_list))
-        # self.player_pokemon_img = self.player_pokemon.image
-        self.enemy_pokemon = Pokemon(**random.choice(self.pokemon_list))
-        # self.enemy_pokemon_img = self.enemy_pokemon.image
-
-        
+        self.player_pokemon = None
+        self.enemy_pokemon = None
+    
+    # Initial selection
+        self.player_pokemon = self.run_selection_screen()
+        self.enemy_pokemon = Pokemon(**random.choice(self.load_pokemons()))
+    
         self.show_message(f"Un {self.enemy_pokemon.name} sauvage apparaît!", 2000)
 
         while self.combat_active:
@@ -166,7 +226,7 @@ class Combat:
                 self.screen.blit(self.font.render(f"Enemy: {self.enemy_pokemon.name}", True, (0, 0, 0)), (500, 50))
                 enemy_pokemon_img = pygame.image.load(self.enemy_pokemon.image)
                 self.screen.blit(enemy_pokemon_img, (500, 50))
-                
+
                 self.draw_health_bar(self.enemy_pokemon, 500, 80)
                 for btn in self.buttons:
                     self.draw_button(btn["rect"], btn["text"])
@@ -219,7 +279,12 @@ class Combat:
                     return False
 
             elif action == "switch":
-                self.show_message("Changement non implémenté!", 1500)
+                # Switch Pokémon
+                new_pokemon = self.run_selection_screen()
+                if new_pokemon:
+                    self.player_pokemon = new_pokemon
+                    self.show_message(f"{self.player_pokemon.name} est prêt à combattre!", 1500)
+                continue
 
             elif action == "flee":
                 self.show_message("Vous avez fui le combat!", 1500)
