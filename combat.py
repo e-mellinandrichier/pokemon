@@ -13,7 +13,7 @@ class Combat:
         self.clock = pygame.time.Clock()
         
         # Charger les Pokémon
-        with open('pokedex.json', 'r') as f:
+        with open('pokemon.json', 'r') as f:
             self.pokemon_list = json.load(f)
             
         # Initialisation des Pokémon
@@ -134,7 +134,7 @@ class Combat:
         return max(10, int(damage))
 
     def load_pokemons(self):
-        with open('pokedex.json', 'r') as f:
+        with open('pokemon.json', 'r') as f:
             return json.load(f)
 
     def display_pokemons(self, pokedex):
@@ -189,8 +189,21 @@ class Combat:
             
             pygame.display.flip()
             self.clock.tick(30)
-        
         return None
+
+    def add_pokemon(self, new_pokemon):
+        try:
+            with open("pokedex.json", "r") as file:
+                data = json.load(file)
+        except FileNotFoundError:
+            data = []
+
+        # 2. Append new entry
+        data.append(new_pokemon)
+
+        # 3. Write back all data
+        with open("pokedex.json", "w") as file:
+            json.dump(data, file, indent=4)
 
     def start(self):
         self.combat_active = True
@@ -199,6 +212,8 @@ class Combat:
     
     # Initial selection
         self.player_pokemon = self.run_selection_screen()
+        new_pokemon = self.player_pokemon.pokemon_data()
+        self.add_pokemon(new_pokemon)
         self.enemy_pokemon = Pokemon(**random.choice(self.load_pokemons()))
     
         self.show_message(f"Un {self.enemy_pokemon.name} sauvage apparaît!", 2000)
@@ -239,6 +254,8 @@ class Combat:
                 
                 # Vérifier si l'ennemi est K.O.
                 if self.enemy_pokemon.is_fainted():
+                    new_pokemon = self.enemy_pokemon.pokemon_data()
+                    self.add_pokemon(new_pokemon)
                     self.show_message(f"{self.enemy_pokemon.name} est K.O.!", 3000)
                     self.combat_active = False
                     return True

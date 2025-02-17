@@ -1,0 +1,19 @@
+[
+    {"name": "Wattwatt", "hp": 35, "level": 5, "attack": 52, "defense": 40, "types": ["electrik"], "image": "assets/wattwatt.png"},
+    {"name": "Sabelette", "hp": 45, "level": 5, "attack": 49, "defense": 49, "types": ["sol"], "image": "assets/sabelette.png"},
+    {"name": "Salameche", "hp": 39, "level": 5, "attack": 52, "defense": 43, "types": ["feu"], "image": "assets/salameche.png"},
+    {"name": "Psychokwak", "hp": 44, "level": 5, "attack": 48, "defense": 65, "types": ["eau"], "image": "assets/psychokwak.png"},
+    {"name": "Apitrini", "hp": 44, "level": 5, "attack": 48, "defense": 65, "types": ["insecte"], "image": "assets/apitrini.png"},
+    {"name": "Evoli", "hp": 39, "level": 5, "attack": 48, "defense": 50, "types": ["normal"], "image": "assets/evoli.png"},
+    {"name": "Germignon", "hp": 44, "level": 5, "attack": 48, "defense": 65, "types": ["plante"], "image": "assets/germignon.png"},
+    {"name": "Coupenotte", "hp": 46, "level": 5, "attack": 48, "defense": 65, "types": ["dragon"], "image": "assets/coupenotte.png"},
+    {"name": "Poichigeon", "hp": 44, "level": 5, "attack": 48, "defense": 57, "types": ["vol"], "image": "assets/poichigeon.png"},
+    {"name": "Kicklee", "hp": 44, "level": 5, "attack": 48, "defense": 65, "types": ["combat"], "image": "assets/kicklee.png"},
+    {"name": "Polarhume", "hp": 44, "level": 5, "attack": 48, "defense": 65, "types": ["glace"], "image": "assets/polarhume.png"},
+    {"name": "Racaillou", "hp": 44, "level": 5, "attack": 48, "defense": 65, "types": ["roche"], "image": "assets/racaillou.png"},
+    {"name": "Smogo", "hp": 44, "level": 5, "attack": 48, "defense": 65, "types": ["poison"], "image": "assets/smogo.png"},
+    {"name": "Rondoudou", "hp": 44, "level": 5, "attack": 48, "defense": 65, "types": ["fee"], "image": "assets/rondoudou.png"},
+    {"name": "Tenefixe", "hp": 44, "level": 5, "attack": 48, "defense": 65, "types": ["tenebres"], "image": "assets/tenefixe.png"},
+    {"name": "Tic", "hp": 44, "level": 5, "attack": 48, "defense": 65, "types": ["acier"], "image": "assets/tic.png"},
+    {"name": "Abra", "hp": 40, "level": 5, "attack": 38, "defense": 65, "types": ["psy"], "image": "assets/abra.png"}
+]

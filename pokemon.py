@@ -21,3 +21,6 @@ class Pokemon:
 
     def is_fainted(self):
         return self.hp <= 0
+    
+    def pokemon_data(self):
+        return {"name": self.name, "hp": self.hp, "level": self.level, "attack": self.attack, "defense": self.defense, "types": self.types, "image": self.image}

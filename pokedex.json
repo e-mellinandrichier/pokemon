@@ -1,6 +1,35 @@
 [
-    {"name": "Wattwatt", "hp": 35, "level": 5, "attack": 52, "defense": 40, "types": ["electrik"], "image": "assets/wattwatt.png"},
-    {"name": "Sabelette", "hp": 45, "level": 5, "attack": 49, "defense": 49, "types": ["sol"], "image": "assets/sabelette.png"},
-    {"name": "Salameche", "hp": 39, "level": 5, "attack": 52, "defense": 43, "types": ["feu"], "image": "assets/salameche.png"},
-    {"name": "Psychokwak", "hp": 44, "level": 5, "attack": 48, "defense": 65, "types": ["eau"], "image": "assets/psychokwak.png"}
+    {
+        "name": "Tenefixe",
+        "hp": 44,
+        "level": 5,
+        "attack": 48,
+        "defense": 65,
+        "types": [
+            "tenebres"
+        ],
+        "image": "assets/tenefixe.png"
+    },
+    {
+        "name": "Coupenotte",
+        "hp": 46,
+        "level": 5,
+        "attack": 48,
+        "defense": 65,
+        "types": [
+            "dragon"
+        ],
+        "image": "assets/coupenotte.png"
+    },
+    {
+        "name": "Apitrini",
+        "hp": 0,
+        "level": 5,
+        "attack": 48,
+        "defense": 65,
+        "types": [
+            "insecte"
+        ],
+        "image": "assets/apitrini.png"
+    }
 ]

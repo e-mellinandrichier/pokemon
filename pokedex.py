@@ -12,6 +12,8 @@ class Pokedex():
     def load_pokemons(self):
         with open('pokedex.json', 'r') as f:
             return json.load(f)
+
+
     
     def show(self):
         running = True
