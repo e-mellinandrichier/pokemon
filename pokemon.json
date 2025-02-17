@@ -15,5 +15,6 @@
     {"name": "Rondoudou", "hp": 44, "level": 5, "attack": 48, "defense": 65, "types": ["fee"], "image": "assets/rondoudou.png"},
     {"name": "Tenefixe", "hp": 44, "level": 5, "attack": 48, "defense": 65, "types": ["tenebres"], "image": "assets/tenefixe.png"},
     {"name": "Tic", "hp": 44, "level": 5, "attack": 48, "defense": 65, "types": ["acier"], "image": "assets/tic.png"},
+    {"name": "Fantominus", "hp": 40, "level": 5, "attack": 38, "defense": 65, "types": ["spectre"], "image": "assets/fantominus.png"},
     {"name": "Abra", "hp": 40, "level": 5, "attack": 38, "defense": 65, "types": ["psy"], "image": "assets/abra.png"}
 ]

@@ -21,10 +21,10 @@ class Pokedex():
                     running = False
             screen.fill((255, 255, 255))
             pokemon_image_list = []
-            x = 100
-            y = 100
+            x = 50
+            y = 50
             grid_columns = 6
-            grid_rows = 2
+            grid_rows = 3
             image_width = 100
             image_height = 100
             pokedex = self.load_pokemons()

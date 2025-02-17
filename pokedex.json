@@ -31,5 +31,38 @@
             "tenebres"
         ],
         "image": "assets/tenefixe.png"
+    },
+    {
+        "name": "Kicklee",
+        "hp": 44,
+        "level": 5,
+        "attack": 48,
+        "defense": 65,
+        "types": [
+            "combat"
+        ],
+        "image": "assets/kicklee.png"
+    },
+    {
+        "name": "Wattwatt",
+        "hp": 0,
+        "level": 5,
+        "attack": 52,
+        "defense": 40,
+        "types": [
+            "electrik"
+        ],
+        "image": "assets/wattwatt.png"
+    },
+    {
+        "name": "Abra",
+        "hp": 40,
+        "level": 5,
+        "attack": 38,
+        "defense": 65,
+        "types": [
+            "psy"
+        ],
+        "image": "assets/abra.png"
     }
 ]
