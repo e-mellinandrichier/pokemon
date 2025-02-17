@@ -195,11 +195,15 @@ class Combat:
         try:
             with open("pokedex.json", "r") as file:
                 data = json.load(file)
-        except FileNotFoundError:
+        except (FileNotFoundError, json.decoder.JSONDecodeError):
             data = []
 
-        # 2. Append new entry
-        data.append(new_pokemon)
+        if any(pokemon.get('name') == new_pokemon.get('name') for pokemon in data):
+            print(f"Pokemon {new_pokemon['name']} already exists in the Pokedex!")
+
+        else: 
+            # 2. Append new entry
+            data.append(new_pokemon)
 
         # 3. Write back all data
         with open("pokedex.json", "w") as file:

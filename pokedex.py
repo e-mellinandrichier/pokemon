@@ -13,8 +13,6 @@ class Pokedex():
         with open('pokedex.json', 'r') as f:
             return json.load(f)
 
-
-    
     def show(self):
         running = True
         while running:
