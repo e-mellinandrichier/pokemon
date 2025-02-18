@@ -146,9 +146,8 @@ class Combat:
         for i, p in enumerate(pokedex):
             pokemon = Pokemon(
                 p["name"], p["hp"], p["level"], 
-                p["attack"], p["defense"], p["types"], p["image"]
+                p["attack"], p["defense"], p["types"], p["image"], p["max_hp"]
             )
-
             column = i % pokemons_per_line
             row = i // pokemons_per_line
             x = origin_x + column * space_x
@@ -192,6 +191,7 @@ class Combat:
         if any(pokemon.get('name') == new_pokemon.get('name') for pokemon in data):
             pass
         else: 
+            new_pokemon['hp'] = new_pokemon['max_hp']
             data.append(new_pokemon)
 
         with open("pokedex.json", "w") as file:
@@ -210,7 +210,6 @@ class Combat:
 
         while self.combat_active:
             action = self.player_turn()
-            
             if action == "quit":
                 return
 

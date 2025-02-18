@@ -5,19 +5,15 @@ from combat import Combat
 
 from pokedex import Pokedex
 
-# Initialisation de Pygame
 pygame.init()
 
-# Paramètres de la fenêtre
 WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Pokémon Game")
 
-# Couleurs
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
-# Police
 font = pygame.font.Font(None, 36)
 
 def draw_text(text, font, color, surface, x, y):
