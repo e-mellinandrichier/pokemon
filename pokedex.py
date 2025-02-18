@@ -31,18 +31,14 @@ class Pokedex():
                 if event.type == pygame.QUIT:
                     running = False
                 elif event.type == pygame.MOUSEBUTTONDOWN:
-                    # Get mouse position and calculate grid cell
                     mouse_x, mouse_y = event.pos
                     col = mouse_x // image_width
                     row = mouse_y // image_height
                     index = (row -1) * grid_columns + col - 1
-                    print(index)
                     selected_pokemon = pokedex[index]
-
 
             screen.fill((255, 255, 255))
 
-            # Draw Pokémon grid
             for row_idx in range(grid_rows):
                 for col_idx in range(grid_columns):
                     index = row_idx * grid_columns + col_idx

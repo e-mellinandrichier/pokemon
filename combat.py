@@ -174,7 +174,12 @@ class Combat:
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     mouse_pos = pygame.mouse.get_pos()
                     for pokemon in displayed_pokemons:
-                        if pokemon.rect.collidepoint(mouse_pos):
+                        x = mouse_pos[0]
+                        y = mouse_pos[1]
+                        y += 100
+                        x += 100
+                        if pokemon.rect.collidepoint((x, y)):
+                            
                             return pokemon
             
             pygame.display.flip()
@@ -210,6 +215,7 @@ class Combat:
 
         while self.combat_active:
             action = self.player_turn()
+
             if action == "quit":
                 return
 
@@ -235,7 +241,6 @@ class Combat:
                 self.screen.blit(text_surf, (self.width//2 - text_surf.get_width()//2, 300))
                 pygame.display.flip()
                 
-
                 pygame.time.delay(1500)
                 
                 if self.enemy_pokemon.is_fainted():
