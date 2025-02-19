@@ -1,0 +1,98 @@
+[
+    {
+        "name": "Salameche",
+        "hp": 39,
+        "level": 5,
+        "attack": 52,
+        "defense": 43,
+        "types": [
+            "feu"
+        ],
+        "image": "assets/salameche.png",
+        "max_hp": 39
+    },
+    {
+        "name": "Abra",
+        "hp": 40,
+        "level": 5,
+        "attack": 38,
+        "defense": 65,
+        "types": [
+            "psy"
+        ],
+        "image": "assets/abra.png",
+        "max_hp": 40
+    },
+    {
+        "name": "Wattwatt",
+        "hp": 35,
+        "level": 5,
+        "attack": 52,
+        "defense": 40,
+        "types": [
+            "electrik"
+        ],
+        "image": "assets/wattwatt.png",
+        "max_hp": 35
+    },
+    {
+        "name": "Kicklee",
+        "hp": 44,
+        "level": 5,
+        "attack": 48,
+        "defense": 65,
+        "types": [
+            "combat"
+        ],
+        "image": "assets/kicklee.png",
+        "max_hp": 44
+    },
+    {
+        "name": "Poichigeon",
+        "hp": 44,
+        "level": 5,
+        "attack": 48,
+        "defense": 57,
+        "types": [
+            "vol"
+        ],
+        "image": "assets/poichigeon.png",
+        "max_hp": 44
+    },
+    {
+        "name": "Tic",
+        "hp": 44,
+        "level": 5,
+        "attack": 48,
+        "defense": 65,
+        "types": [
+            "acier"
+        ],
+        "image": "assets/tic.png",
+        "max_hp": 44
+    },
+    {
+        "name": "Tenefixe",
+        "hp": 44,
+        "level": 5,
+        "attack": 48,
+        "defense": 65,
+        "types": [
+            "tenebres"
+        ],
+        "image": "assets/tenefixe.png",
+        "max_hp": 44
+    },
+    {
+        "name": "Rondoudou",
+        "hp": 44,
+        "level": 5,
+        "attack": 48,
+        "defense": 65,
+        "types": [
+            "fee"
+        ],
+        "image": "assets/rondoudou.png",
+        "max_hp": 44
+    }
+]
