@@ -10,5 +10,29 @@
         ],
         "image": "assets/apitrini.png",
         "max_hp": 44
+    },
+    {
+        "name": "Psychokwak",
+        "hp": 44,
+        "level": 5,
+        "attack": 48,
+        "defense": 65,
+        "types": [
+            "eau"
+        ],
+        "image": "assets/psychokwak.png",
+        "max_hp": 44
+    },
+    {
+        "name": "Rondoudou",
+        "hp": 44,
+        "level": 5,
+        "attack": 48,
+        "defense": 65,
+        "types": [
+            "fee"
+        ],
+        "image": "assets/rondoudou.png",
+        "max_hp": 44
     }
 ]
