@@ -1,9 +1,10 @@
 import pygame
 import json
 
-SCREEN_WIDTH, SCREEN_HEIGHT = 1000, 700
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("Pokémon")
+pygame.font.init()
+font = pygame.font.SysFont('Arial', 24)
 
 class Pokedex():
     def __init__(self):
@@ -15,30 +16,58 @@ class Pokedex():
 
     def show(self):
         running = True
+        pokedex = self.load_pokemons()
+
+        grid_columns = 6
+        grid_rows = 3
+        image_height = 100
+        image_width = 100
+        pokemon_image_list = [p['image'] for p in pokedex]
+        images = [pygame.image.load(path) for path in pokemon_image_list]
+
+        selected_pokemon = None
         while running:
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:   
+                if event.type == pygame.QUIT:
                     running = False
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_x, mouse_y = event.pos
+                    col = mouse_x // image_width
+                    row = mouse_y // image_height
+                    index = (row -1) * grid_columns + col - 1
+                    selected_pokemon = pokedex[index]
+
             screen.fill((255, 255, 255))
-            pokemon_image_list = []
-            x = 100
-            y = 100
-            grid_columns = 6
-            grid_rows = 2
-            image_width = 100
-            image_height = 100
-            pokedex = self.load_pokemons()
-            for p in pokedex:
-                pokemon_image_list.append(p['image'])
-            images = [pygame.image.load(path) for path in pokemon_image_list]
-            for row in range(grid_rows):
-                for col in range(grid_columns):
-                    x = col * image_width
-                    y = row * image_height
-                    index = row * grid_columns + col
+
+            for row_idx in range(grid_rows):
+                for col_idx in range(grid_columns):
+                    index = row_idx * grid_columns + col_idx
                     if index < len(images):
+                        x = col_idx * image_width
+                        y = row_idx * image_height
                         screen.blit(images[index], (x, y))
+
+            # Draw Pokémon info if selected
+            if selected_pokemon:
+                self.show_infos(selected_pokemon)
+
             pygame.display.flip()
+    
+    def show_infos(self, pokemon):
+        screen.fill((255, 255, 255))
+        lines = [
+            f"Name: {pokemon['name']}",
+            f"HP: {pokemon['hp']}",
+            f"Attack: {pokemon['attack']}",
+            f"Defense: {pokemon['defense']}",
+        ]
+        for i, line in enumerate(lines):
+            text_surface = font.render(line, True, (0, 0, 0))
+            screen.blit(text_surface, (100, 100 + i * 30))
+
+        image = pygame.image.load(pokemon['image'])
+        screen.blit(image, (300, 0))
+        pygame.display.flip()
 
 # au lancement du jeu, on sélectionne un des pokemon pour combattre avec
 # afficher tous les pokemon du pokedex qui sont déselectionnés 

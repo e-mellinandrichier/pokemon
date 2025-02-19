@@ -12,11 +12,9 @@ class Combat:
         self.font = pygame.font.Font(None, 36)
         self.clock = pygame.time.Clock()
         
-        # Charger les Pokémon
         with open('pokemon.json', 'r') as f:
             self.pokemon_list = json.load(f)
             
-        # Initialisation des Pokémon
         self.player_pokemon = None
         self.player_pokemon_img = None
         self.enemy_pokemon = None
@@ -40,14 +38,13 @@ class Combat:
     def draw_health_bar(self, pokemon, x, y):
         bar_width = 200
         bar_height = 20
-        fill = (pokemon.hp / pokemon.max_hp) * bar_width  # Calcul de la proportion de vie
+        fill = (pokemon.hp / pokemon.max_hp) * bar_width
         outline_rect = pygame.Rect(x, y, bar_width, bar_height)
         fill_rect = pygame.Rect(x, y, fill, bar_height)
         
-        # Dessiner la barre de vie
-        pygame.draw.rect(self.screen, (255, 0, 0), outline_rect)  # Fond rouge
-        pygame.draw.rect(self.screen, (0, 255, 0), fill_rect)     # Barre verte
-        pygame.draw.rect(self.screen, (0, 0, 0), outline_rect, 2) # Contour noir
+        pygame.draw.rect(self.screen, (255, 0, 0), outline_rect)
+        pygame.draw.rect(self.screen, (0, 255, 0), fill_rect)
+        pygame.draw.rect(self.screen, (0, 0, 0), outline_rect, 2)
 
     def show_message(self, text, duration=500):
         self.message = text
@@ -69,24 +66,22 @@ class Combat:
     def player_turn(self):
         action = None
         while not action:
-            self.screen.fill((255, 255, 255))  # Fond blanc
+            self.screen.fill((255, 255, 255))
             
             # Dessiner les Pokémon
             player_pokemon_img = pygame.image.load(self.player_pokemon.image)
             self.screen.blit(self.font.render(f"Player: {self.player_pokemon.name}", True, (0, 0, 0)), (50, 50))
             self.screen.blit(player_pokemon_img, (50, 250))
-            self.draw_health_bar(self.player_pokemon, 50, 80)  # Barre de vie du joueur
+            self.draw_health_bar(self.player_pokemon, 50, 80)
             
             enemy_pokemon_img = pygame.image.load(self.enemy_pokemon.image)
             self.screen.blit(enemy_pokemon_img, (500, 50))
             self.screen.blit(self.font.render(f"Enemy: {self.enemy_pokemon.name}", True, (0, 0, 0)), (500, 50))
-            self.draw_health_bar(self.enemy_pokemon, 500, 80)  # Barre de vie de l'ennemi
+            self.draw_health_bar(self.enemy_pokemon, 500, 80)
             
-            # Dessiner les boutons
             for btn in self.buttons:
                 self.draw_button(btn["rect"], btn["text"])
             
-            # Afficher les messages
             if self.message:
                 text_surf = self.font.render(self.message, True, (0, 0, 0))
                 self.screen.blit(text_surf, (self.width//2 - text_surf.get_width()//2, 300))
@@ -144,26 +139,26 @@ class Combat:
         origin_x = 10
         origin_y = 80
         pokemons_per_line = 6  # Fixed typo "lign" to "line"
+        space_x = 100
+        space_y = 100
+        origin_x = 10
+        origin_y = 10
+        pokemons_per_line = 6
 
         self.screen.fill((255, 255, 255))
         self.show_message("Sélectionner un Pokémon :")
 
-        # Single loop through each Pokémon
         for i, p in enumerate(pokedex):
-            # Create Pokémon instance using current item 'p'
             pokemon = Pokemon(
                 p["name"], p["hp"], p["level"], 
-                p["attack"], p["defense"], p["types"], p["image"]
+                p["attack"], p["defense"], p["types"], p["image"], p["max_hp"]
             )
-            
-            # Calculate grid position based on index 'i'
             column = i % pokemons_per_line
             row = i // pokemons_per_line
             x = origin_x + column * space_x
             y = origin_y + row * space_y
             
             pokemon.rect.topleft = (x, y)
-            # Blit the Pokémon at calculated position
             self.screen.blit(pokemon.assets, (x, y))
             pokemon_list.append(pokemon)
 
@@ -184,8 +179,13 @@ class Combat:
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     mouse_pos = pygame.mouse.get_pos()
                     for pokemon in displayed_pokemons:
-                        if pokemon.rect.collidepoint(mouse_pos):
-                            return pokemon  # Return selected Pokémon
+                        x = mouse_pos[0]
+                        y = mouse_pos[1]
+                        y += 100
+                        x += 100
+                        if pokemon.rect.collidepoint((x, y)):
+                            
+                            return pokemon
             
             pygame.display.flip()
             self.clock.tick(30)
@@ -195,13 +195,15 @@ class Combat:
         try:
             with open("pokedex.json", "r") as file:
                 data = json.load(file)
-        except FileNotFoundError:
+        except (FileNotFoundError, json.decoder.JSONDecodeError):
             data = []
 
-        # 2. Append new entry
-        data.append(new_pokemon)
+        if any(pokemon.get('name') == new_pokemon.get('name') for pokemon in data):
+            pass
+        else: 
+            new_pokemon['hp'] = new_pokemon['max_hp']
+            data.append(new_pokemon)
 
-        # 3. Write back all data
         with open("pokedex.json", "w") as file:
             json.dump(data, file, indent=4)
 
@@ -209,8 +211,6 @@ class Combat:
         self.combat_active = True
         self.player_pokemon = None
         self.enemy_pokemon = None
-    
-    # Initial selection
         self.player_pokemon = self.run_selection_screen()
         new_pokemon = self.player_pokemon.pokemon_data()
         self.add_pokemon(new_pokemon)
@@ -219,19 +219,16 @@ class Combat:
         self.show_message(f"Un {self.enemy_pokemon.name} sauvage apparaît!", 2000)
 
         while self.combat_active:
-            # Tour du joueur
             action = self.player_turn()
-            
+
             if action == "quit":
                 return
 
             if action == "attack":
-                # Attaque du joueur
                 damage = self.calculate_damage(self.player_pokemon, self.enemy_pokemon)
                 self.enemy_pokemon.take_damage(damage)
-                self.show_message(f"{self.player_pokemon.name} attaque pour {damage} dégâts!", 1500)  # Afficher le message pendant 1,5 seconde
+                self.show_message(f"{self.player_pokemon.name} attaque pour {damage} dégâts!", 1500)
                 
-                # Mettre à jour l'affichage avant de passer à la contre-attaque
                 self.screen.fill((255, 255, 255))
                 self.screen.blit(self.font.render(f"Player: {self.player_pokemon.name}", True, (0, 0, 0)), (50, 50))
                 player_pokemon_img = pygame.image.load(self.player_pokemon.image)
@@ -249,10 +246,8 @@ class Combat:
                 self.screen.blit(text_surf, (self.width//2 - text_surf.get_width()//2, 300))
                 pygame.display.flip()
                 
-                # Pause pour afficher le message
-                pygame.time.delay(1500)  # Pause de 1,5 seconde
+                pygame.time.delay(1500)
                 
-                # Vérifier si l'ennemi est K.O.
                 if self.enemy_pokemon.is_fainted():
                     new_pokemon = self.enemy_pokemon.pokemon_data()
                     self.add_pokemon(new_pokemon)
@@ -260,12 +255,11 @@ class Combat:
                     self.combat_active = False
                     return True
                 
-                # Contre-attaque de l'ennemi
                 damage = self.calculate_damage(self.enemy_pokemon, self.player_pokemon)
                 self.player_pokemon.take_damage(damage)
                 self.show_message(f"{self.enemy_pokemon.name} contre-attaque pour {damage} dégâts!", 1500)
                 
-                # Mettre à jour l'affichage après la contre-attaque
+    
                 self.screen.fill((255, 255, 255))
                 self.screen.blit(self.font.render(f"Player: {self.player_pokemon.name}", True, (0, 0, 0)), (50, 50))
                 self.draw_health_bar(self.player_pokemon, 50, 80)
@@ -282,12 +276,9 @@ class Combat:
                 text_surf = self.font.render(f"{self.enemy_pokemon.name} contre-attaque pour {damage} dégâts!", True, (0, 0, 0))
                 self.screen.blit(text_surf, (self.width//2 - text_surf.get_width()//2, 300))
                 pygame.display.flip()
-                
-                # Pause pour afficher le message
                     
-                pygame.time.delay(1500)  # Pause de 1,5 seconde
+                pygame.time.delay(1500)
                 
-                # Vérifier si le joueur est K.O.
                 if self.player_pokemon.is_fainted():
                     self.show_message(f"{self.player_pokemon.name} est K.O.!", 3000)
                     pygame.display.flip()
@@ -296,7 +287,6 @@ class Combat:
                     return False
 
             elif action == "switch":
-                # Switch Pokémon
                 new_pokemon = self.run_selection_screen()
                 if new_pokemon:
                     self.player_pokemon = new_pokemon

@@ -1,101 +1,14 @@
 [
     {
-        "name": "Tenefixe",
-        "hp": 44,
-        "level": 5,
-        "attack": 48,
-        "defense": 65,
-        "types": [
-            "tenebres"
-        ],
-        "image": "assets/tenefixe.png"
-    },
-    {
-        "name": "Coupenotte",
-        "hp": 46,
-        "level": 5,
-        "attack": 48,
-        "defense": 65,
-        "types": [
-            "dragon"
-        ],
-        "image": "assets/coupenotte.png"
-    },
-    {
         "name": "Apitrini",
-        "hp": 0,
+        "hp": 44,
         "level": 5,
         "attack": 48,
         "defense": 65,
         "types": [
             "insecte"
         ],
-        "image": "assets/apitrini.png"
-    },
-    {
-        "name": "Salameche",
-        "hp": 39,
-        "level": 5,
-        "attack": 52,
-        "defense": 43,
-        "types": [
-            "feu"
-        ],
-        "image": "assets/salameche.png"
-    },
-    {
-        "name": "Wattwatt",
-        "hp": 0,
-        "level": 5,
-        "attack": 52,
-        "defense": 40,
-        "types": [
-            "electrik"
-        ],
-        "image": "assets/wattwatt.png"
-    },
-    {
-        "name": "Tic",
-        "hp": 44,
-        "level": 5,
-        "attack": 48,
-        "defense": 65,
-        "types": [
-            "acier"
-        ],
-        "image": "assets/tic.png"
-    },
-    {
-        "name": "Germignon",
-        "hp": 44,
-        "level": 5,
-        "attack": 48,
-        "defense": 65,
-        "types": [
-            "plante"
-        ],
-        "image": "assets/germignon.png"
-    },
-    {
-        "name": "Psychokwak",
-        "hp": 44,
-        "level": 5,
-        "attack": 48,
-        "defense": 65,
-        "types": [
-            "eau"
-        ],
-        "image": "assets/psychokwak.png"
-    },
-    {
-        "name": "Evoli",
-        "hp": 39,
-        "level": 5,
-        "attack": 48,
-        "defense": 50,
-        "types": [
-            "normal"
-        ],
-        "image": "assets/evoli.png"
+        "image": "assets/apitrini.png",
+        "max_hp": 44
     }
 ]
