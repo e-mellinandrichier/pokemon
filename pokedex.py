@@ -38,7 +38,6 @@ class Pokedex():
                     selected_pokemon = pokedex[index]
 
             screen.fill((255, 255, 255))
-
             for row_idx in range(grid_rows):
                 for col_idx in range(grid_columns):
                     index = row_idx * grid_columns + col_idx
@@ -47,7 +46,6 @@ class Pokedex():
                         y = row_idx * image_height
                         screen.blit(images[index], (x, y))
 
-            # Draw Pokémon info if selected
             if selected_pokemon:
                 self.show_infos(selected_pokemon)
 

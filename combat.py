@@ -204,9 +204,9 @@ class Combat:
 
     def start(self):
         self.combat_active = True
-        self.player_pokemon = None
         self.enemy_pokemon = None
-        self.player_pokemon = self.run_selection_screen()
+        if self.player_pokemon == None:
+            self.player_pokemon = self.run_selection_screen()
         new_pokemon = self.player_pokemon.pokemon_data()
         self.add_pokemon(new_pokemon)
         self.enemy_pokemon = Pokemon(**random.choice(self.load_pokemons()))
@@ -246,9 +246,10 @@ class Combat:
                 if self.enemy_pokemon.is_fainted():
                     new_pokemon = self.enemy_pokemon.pokemon_data()
                     self.add_pokemon(new_pokemon)
+                    self.player_pokemon.evolve(self.player_pokemon)
                     self.show_message(f"{self.enemy_pokemon.name} est K.O.!", 3000)
-                    self.combat_active = False
-                    return True
+                    # self.combat_active = False
+                    self.start()
                 
                 damage = self.calculate_damage(self.enemy_pokemon, self.player_pokemon)
                 self.player_pokemon.take_damage(damage)
@@ -278,8 +279,9 @@ class Combat:
                     self.show_message(f"{self.player_pokemon.name} est K.O.!", 3000)
                     pygame.display.flip()
                     pygame.time.delay(1500)
-                    self.combat_active = False
-                    return False
+                    # self.combat_active = False
+                    self.start()
+                    
 
             elif action == "switch":
                 new_pokemon = self.run_selection_screen()
