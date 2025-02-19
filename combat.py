@@ -139,10 +139,10 @@ class Combat:
 
     def display_pokemons(self, pokedex):
         pokemon_list = []
-        space_x = 150
-        space_y = 150
-        origin_x = 50
-        origin_y = 100
+        space_x = 140
+        space_y = 140
+        origin_x = 10
+        origin_y = 80
         pokemons_per_line = 6  # Fixed typo "lign" to "line"
 
         self.screen.fill((255, 255, 255))

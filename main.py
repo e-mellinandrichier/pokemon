@@ -9,7 +9,7 @@ from pokedex import Pokedex
 pygame.init()
 
 # Paramètres de la fenêtre
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 900, 900
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Pokémon Game")
 
