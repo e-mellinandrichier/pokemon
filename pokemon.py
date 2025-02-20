@@ -23,3 +23,4 @@ class Pokemon:
     
     def pokemon_data(self):
         return {"name": self.name, "hp": self.hp, "level": self.level, "attack": self.attack, "defense": self.defense, "types": self.types, "image": self.image, "max_hp": self.max_hp}
+    

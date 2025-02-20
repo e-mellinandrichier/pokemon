@@ -1,5 +1,6 @@
 import pygame
 import json
+from pokemon import Pokemon
 
 screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("Pokémon")
@@ -13,6 +14,15 @@ class Pokedex():
     def load_pokemons(self):
         with open('pokedex.json', 'r') as f:
             return json.load(f)
+
+    def add_pokemon(self, new_pokemon):
+        self.list.append(new_pokemon)
+        self.save()
+
+    def save(self):
+        data = [pokemon.to_dict() for pokemon in self.list]
+        with open(self.filename, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=4)
 
     def show(self):
         running = True
@@ -68,9 +78,39 @@ class Pokedex():
         image = pygame.image.load(pokemon['image'])
         screen.blit(image, (300, 0))
         pygame.display.flip()
+    
+class AddPokemon:
+    def __init__(self, pokedex, screen, font):
+        self.pokedex = pokedex
+        self.screen = screen
+        self.font = font
+    
 
-# au lancement du jeu, on sélectionne un des pokemon pour combattre avec
-# afficher tous les pokemon du pokedex qui sont déselectionnés 
-# selctionne les pokemon
-# retourne une deuxième liste contenant uniquement les pokemon séléctionnés
-# sur cette liste -> qu'on fait le random sur le opponent pokemon
+    def display_form(self):
+        name = pygame_input("Enter Pokémon name:", self.screen, self.font, pos=(300, 200))
+        type_ = pygame_input("Enter Pokémon type:", self.screen, self.font, pos=(300, 260))
+        hp_str = pygame_input("Enter Pokémon HP:", self.screen, self.font, pos=(300, 320))
+        attack_str = pygame_input("Enter Pokémon attack:", self.screen, self.font, pos=(300, 380))
+        defense_str = pygame_input("Enter Pokémon defense:", self.screen, self.font, pos=(300, 440))
+
+        try:
+            hp = int(hp_str)
+            attack = int(attack_str)
+            defense = int(defense_str)
+        except ValueError:
+            self.screen.fill(WHITE)
+            draw_text("Input error: numeric values expected.", self.font, BLACK, self.screen, 300, 500)
+            pygame.display.flip()
+            pygame.time.wait(2000)
+            return None
+
+        return Pokemon(name, type_, hp, attack, defense)
+
+    def add(self):
+        new_pokemon = self.display_form()
+        if new_pokemon:
+            self.pokedex.add_pokemon(new_pokemon)
+            self.screen.fill(WHITE)
+            draw_text(f"{new_pokemon.name} has been added to the Pokedex!", self.font, BLACK, self.screen, 300, 300)
+            pygame.display.flip()
+            pygame.time.wait(2000)

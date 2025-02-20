@@ -4,6 +4,7 @@ import json
 from combat import Combat
 
 from pokedex import Pokedex
+from pokedex import AddPokemon
 
 pygame.init()
 
@@ -44,7 +45,8 @@ def main_menu():
                     result = combat.start()
                 elif event.key == pygame.K_2:
                     pokedex = Pokedex()
-                    result = pokedex.show()
+                    add_interface = AddPokemon(pokedex, screen, font)
+                    add_interface.add()
                 elif event.key == pygame.K_3:
                     pokedex = Pokedex()
                     pokedex.show()
