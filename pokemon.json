@@ -1,5 +1,5 @@
 [
-    {"name": "Wattwatt", "hp": 100, "level": 5, "attack": 65, "defense": 50, "types": ["electrik"], "image": "assets/wattwatt.png", "max_hp" : 35},
+    {"name": "Wattwatt", "hp": 100, "level": 13, "attack": 65, "defense": 50, "types": ["electrik"], "image": "assets/wattwatt.png", "max_hp" : 35},
     {"name": "Sabelette", "hp": 45, "level": 5, "attack": 49, "defense": 49, "types": ["sol"], "image": "assets/sabelette.png", "max_hp" : 45},
     {"name": "Salameche", "hp": 39, "level": 5, "attack": 52, "defense": 43, "types": ["feu"], "image": "assets/salameche.png", "max_hp" : 39},
     {"name": "Psychokwak", "hp": 44, "level": 5, "attack": 48, "defense": 65, "types": ["eau"], "image": "assets/psychokwak.png", "max_hp" : 44},

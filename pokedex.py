@@ -10,9 +10,27 @@ class Pokedex():
     def __init__(self):
         self.is_active = True
         
-    def load_pokemons(self):
-        with open('pokedex.json', 'r') as f:
-            return json.load(f)
+    def load_pokemons(self, file):
+        try:
+            with open(file, 'r') as f:
+                pokedex = json.load(f)
+                # print(pokedex)
+                return pokedex
+        except (FileNotFoundError, json.JSONDecodeError):
+            starter = [{        "name": "Wattwatt",
+            "hp": 35,
+            "level": 5,
+            "attack": 52,
+            "defense": 40,
+            "types": [
+                "electrik"
+            ],
+            "image": "assets/wattwatt.png",
+            "max_hp": 35}]
+
+            with open('pokedex.json', 'w') as f:
+                json.dump(starter, f, indent=2)
+            return starter
 
     def show(self):
         running = True

@@ -67,8 +67,6 @@ class Combat:
         action = None
         while not action:
             self.screen.fill((255, 255, 255))
-            
-            # Dessiner les Pokémon
             player_pokemon_img = pygame.image.load(self.player_pokemon.image)
             self.screen.blit(self.font.render(f"Player: {self.player_pokemon.name}", True, (0, 0, 0)), (50, 50))
             self.screen.blit(player_pokemon_img, (50, 250))
@@ -128,9 +126,27 @@ class Combat:
         damage = attacker.attack * multiplier - defender.defense
         return max(10, int(damage))
 
-    def load_pokemons(self):
-        with open('pokemon.json', 'r') as f:
-            return json.load(f)
+    def load_pokemons(self, file):
+        try:
+            with open(file, 'r') as f:
+                pokedex = json.load(f)
+                # print(pokedex)
+                return pokedex
+        except (FileNotFoundError, json.JSONDecodeError):
+            starter = [{        "name": "Wattwatt",
+            "hp": 35,
+            "level": 5,
+            "attack": 52,
+            "defense": 40,
+            "types": [
+                "electrik"
+            ],
+            "image": "assets/wattwatt.png",
+            "max_hp": 35}]
+
+            with open('pokedex.json', 'w') as f:
+                json.dump(starter, f, indent=2)
+            return starter
 
     def display_pokemons(self, pokedex):
         pokemon_list = []
@@ -161,9 +177,8 @@ class Combat:
         return pokemon_list
 
     def run_selection_screen(self):
-        """Handles Pokémon selection screen"""
         selection_active = True
-        pokedex = self.load_pokemons()
+        pokedex = self.load_pokemons('pokedex.json')
         displayed_pokemons = self.display_pokemons(pokedex)
         
         while selection_active:
@@ -209,7 +224,7 @@ class Combat:
             self.player_pokemon = self.run_selection_screen()
         new_pokemon = self.player_pokemon.pokemon_data()
         self.add_pokemon(new_pokemon)
-        self.enemy_pokemon = Pokemon(**random.choice(self.load_pokemons()))
+        self.enemy_pokemon = Pokemon(**random.choice(self.load_pokemons('pokemon.json')))
     
         self.show_message(f"Un {self.enemy_pokemon.name} sauvage apparaît!", 2000)
 
@@ -246,9 +261,9 @@ class Combat:
                 if self.enemy_pokemon.is_fainted():
                     new_pokemon = self.enemy_pokemon.pokemon_data()
                     self.add_pokemon(new_pokemon)
-                    self.player_pokemon.evolve(self.player_pokemon)
+                    self.player_pokemon.level_up(self.player_pokemon)
+                    self.player_pokemon.check_evolution(self.player_pokemon)
                     self.show_message(f"{self.enemy_pokemon.name} est K.O.!", 3000)
-                    # self.combat_active = False
                     self.start()
                 
                 damage = self.calculate_damage(self.enemy_pokemon, self.player_pokemon)
