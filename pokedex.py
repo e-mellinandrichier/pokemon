@@ -14,19 +14,18 @@ class Pokedex():
         try:
             with open(file, 'r') as f:
                 pokedex = json.load(f)
-                # print(pokedex)
                 return pokedex
         except (FileNotFoundError, json.JSONDecodeError):
-            starter = [{        "name": "Wattwatt",
-            "hp": 35,
-            "level": 5,
+            starter = [{"name": "Evoli",
+            "hp": 55,
+            "level": 20,
             "attack": 52,
             "defense": 40,
             "types": [
-                "electrik"
+                "normal"
             ],
-            "image": "assets/wattwatt.png",
-            "max_hp": 35}]
+            "image": "assets/evoli.png",
+            "max_hp": 55}]
 
             with open('pokedex.json', 'w') as f:
                 json.dump(starter, f, indent=2)
@@ -68,7 +67,6 @@ class Pokedex():
                 self.show_infos(selected_pokemon)
             pygame.display.flip()
     
-
     def select_pokemons(self):
         running = True
         pokemons = self.load_pokemons('pokemon.json')
@@ -89,9 +87,8 @@ class Pokedex():
                     mouse_x, mouse_y = event.pos
                     col = mouse_x // image_width
                     row = mouse_y // image_height
-                    index = (row -1) * grid_columns + col -1# Fixed index calculation
-                    if 0 <= index < len(pokemons):  # Prevent index errors
-                        # Toggle selection (add/remove)
+                    index = (row -1) * grid_columns + col -1
+                    if 0 <= index < len(pokemons):
                         if pokemons[index] in selected_pokemon:
                             selected_pokemon.remove(pokemons[index])
                         else:

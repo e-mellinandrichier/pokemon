@@ -1,5 +1,6 @@
 import pygame
 import json
+import random
 
 pygame.init()
 
@@ -27,6 +28,7 @@ class Pokemon:
         current_pokemon.attack += 10
         current_pokemon.defense += 10
         current_pokemon.hp += 10
+        current_pokemon.max_hp += 10
         try:
             with open('pokedex.json', 'r') as f:
                 pokedex = json.load(f)
@@ -35,13 +37,12 @@ class Pokemon:
 
         for entry in pokedex:
             if entry["name"] == current_pokemon.name:
-                entry["level"] = current_pokemon.level
+                entry["level"] >= current_pokemon.level
 
         with open('pokedex.json', 'w') as f:
             json.dump(pokedex, f, indent=2)
         
-
-    def _update_pokedex(self):
+    def update_pokedex(self):
         try:
             # Read existing Pokedex
             with open('pokedex.json', 'r') as f:
@@ -60,29 +61,25 @@ class Pokemon:
     def check_evolution(self, current_pokemon):
         try:
             with open("evolutions.json", "r") as file:
-                 data = json.load(file)
+                data = json.load(file)
         except (FileNotFoundError, json.decoder.JSONDecodeError):
-            data = []
+            return 
 
+        possible_evolutions = []
         for entry in data:
-            if entry["name"] == current_pokemon.name:
-                if entry["level"] == current_pokemon.level:
-                    self.evolve(current_pokemon)
+            if entry["name"] == current_pokemon.name and entry["level"] == current_pokemon.level:
+                possible_evolutions.append(entry)
+                print(possible_evolutions)
+
+        if possible_evolutions:
+            chosen_evolution = random.choice(possible_evolutions)
+            print(chosen_evolution)
+            self.evolve(current_pokemon, chosen_evolution)
     
-    def evolve(self, current_pokemon):
-        try:
-            with open("evolutions.json", "r") as file:
-                 data = json.load(file)
-        except (FileNotFoundError, json.decoder.JSONDecodeError):
-            data = []
-
-        for entry in data:
-            if entry["name"] == current_pokemon.name:
-                current_pokemon.name = entry["new_name"]
-                current_pokemon.image = entry["image"]
-                break
-        else: 
-            pass
+    def evolve(self, current_pokemon, chosen_evolution):
+        current_pokemon.name = chosen_evolution["new_name"]
+        current_pokemon.image = chosen_evolution["image"]
+        current_pokemon.types = chosen_evolution["types"]
 
     def pokemon_data(self):
         return {"name": self.name, "hp": self.hp, "level": self.level, "attack": self.attack, "defense": self.defense, "types": self.types, "image": self.image, "max_hp": self.max_hp}
