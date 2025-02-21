@@ -34,7 +34,7 @@ class Pokedex():
 
     def show(self):
         running = True
-        pokedex = self.load_pokemons()
+        pokedex = self.load_pokemons('pokedex.json')
 
         grid_columns = 6
         grid_rows = 3
@@ -66,9 +66,58 @@ class Pokedex():
 
             if selected_pokemon:
                 self.show_infos(selected_pokemon)
-
             pygame.display.flip()
     
+
+    def select_pokemons(self):
+        running = True
+        pokemons = self.load_pokemons('pokemon.json')
+
+        grid_columns = 6
+        grid_rows = 3
+        image_height = 100
+        image_width = 100
+        pokemon_image_list = [p['image'] for p in pokemons]
+        images = [pygame.image.load(path) for path in pokemon_image_list]
+        selected_pokemon = []
+
+        while running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_x, mouse_y = event.pos
+                    col = mouse_x // image_width
+                    row = mouse_y // image_height
+                    index = (row -1) * grid_columns + col -1# Fixed index calculation
+                    if 0 <= index < len(pokemons):  # Prevent index errors
+                        # Toggle selection (add/remove)
+                        if pokemons[index] in selected_pokemon:
+                            selected_pokemon.remove(pokemons[index])
+                        else:
+                            selected_pokemon.append(pokemons[index])
+                elif event.type == pygame.KEYDOWN:
+                    if event.type == K_ESCAPE:
+                        running = False
+                        
+            screen.fill((255, 255, 255))
+            for row_idx in range(grid_rows):
+                for col_idx in range(grid_columns):
+                    index = row_idx * grid_columns + col_idx
+                    if index < len(images):
+                        x = col_idx * image_width
+                        y = row_idx * image_height
+                        screen.blit(images[index], (x, y))
+                        
+                        # Draw border if selected
+                        if pokemons[index] in selected_pokemon:
+                            border_rect = pygame.Rect((x +80), (y +80), image_width, image_height)
+                            pygame.draw.rect(screen, (0, 0, 0), border_rect, 2)  # Black border
+
+            pygame.display.flip()
+
+        return selected_pokemon
+
     def show_infos(self, pokemon):
         screen.fill((255, 255, 255))
         lines = [

@@ -22,6 +22,7 @@ class Combat:
         self.combat_active = False
         self.selection = False
         self.message = ""
+        self.list_enemy = []
         self.message_timer = 0
         self.buttons = [
             {"rect": pygame.Rect(50, 450, 200, 50), "text": "Attaquer", "action": "attack"},
@@ -114,23 +115,32 @@ class Combat:
             'tenebres': {'normal': 1, 'plante': 1, 'feu': 1, 'eau': 1, 'electrik': 1, 'glace': 1, 'combat': 0.5, 'poison': 1, 'sol': 1, 'vol': 1, 'psy': 2, 'insecte': 1, 'roche': 1, 'spectre': 2, 'dragon': 1, 'tenebres': 0.5, 'acier': 1, 'fee': 0.5},
             'acier': {'normal': 1, 'plante': 0.5, 'feu': 0.5, 'eau': 1, 'electrik': 0.5, 'glace': 2, 'combat': 1, 'poison': 1, 'sol': 1, 'vol': 1, 'psy': 1, 'insecte': 1, 'roche': 2, 'spectre': 1, 'dragon': 1, 'tenebres': 1, 'acier': 0.5, 'fee': 2},
             'fee': {'normal': 1, 'plante': 0.5, 'feu': 1, 'eau': 1, 'electrik': 1, 'glace': 1, 'combat': 1, 'poison': 2, 'sol': 0.5, 'vol': 1, 'psy': 1, 'insecte': 1, 'roche': 1, 'spectre': 1, 'dragon': 2, 'tenebres': 2, 'acier': 0.5, 'fee': 1}
-
-            # 'feu': {'normal': 1, 'plante': 1, 'feu': 1, 'eau': 1, 'electrik': 1, 'glace': 1, 'combat': 1, 'poison': 1, 'sol': 1, 'vol': 1, 'psy': 1, 'insecte': 1, 'roche': 1, 'spectre': 1, 'dragon': 1, 'tenebres': 1, 'acier': 1, 'fee': 1}
         }
 
+        move_type = attacker.types[0] if isinstance(attacker.types, list) else attacker.types
+        
+        if random.randint(1, 15) == 1:
+            return 0
         multiplier = 1
-        for attack_type in attacker.types:
-            for defense_type in defender.types:
-                multiplier *= type_chart.get(attack_type.lower(), {}).get(defense_type.lower(), 1)
+        
+        for defense_type in defender.types:
+            if isinstance(defense_type, str):  
+                effectiveness = type_chart.get(move_type.lower(), {}).get(defense_type.lower(), 1)
+                multiplier *= effectiveness
+            else:
+                print(f"Warning: {defense_type} is not a valid type (expected string).")
 
-        damage = attacker.attack * multiplier - defender.defense
-        return max(10, int(damage))
+        base_power = 50
+        damage = ( (2 * attacker.level / 5 + 2) * base_power * attacker.attack / defender.defense ) // 50
+
+        damage = (damage + 2) * multiplier
+
+        return max(1, int(damage))
 
     def load_pokemons(self, file):
         try:
             with open(file, 'r') as f:
                 pokedex = json.load(f)
-                # print(pokedex)
                 return pokedex
         except (FileNotFoundError, json.JSONDecodeError):
             starter = [{        "name": "Wattwatt",
@@ -194,7 +204,6 @@ class Combat:
                         y += 100
                         x += 100
                         if pokemon.rect.collidepoint((x, y)):
-                            
                             return pokemon
             
             pygame.display.flip()
@@ -217,22 +226,29 @@ class Combat:
         with open("pokedex.json", "w") as file:
             json.dump(data, file, indent=4)
 
+    def enemy(self):
+        p = Pokedex()
+        list_enemy = p.select_pokemons()
+        return list_enemy
+
     def start(self):
         self.combat_active = True
-        self.enemy_pokemon = None
+        if self.list_enemy == []:
+            self.list_enemy += self.enemy()
+        index = random.randint(0, len(self.list_enemy) - 1)
+        enemy = Pokemon(self.list_enemy[index]['name'], self.list_enemy[index]['hp'], self.list_enemy[index]['level'], self.list_enemy[index]['attack'], self.list_enemy[index]['defense'], self.list_enemy[index]['types'], self.list_enemy[index]['image'], self.list_enemy[index]['max_hp'])
+        self.enemy_pokemon = enemy
         if self.player_pokemon == None:
             self.player_pokemon = self.run_selection_screen()
         new_pokemon = self.player_pokemon.pokemon_data()
         self.add_pokemon(new_pokemon)
-        self.enemy_pokemon = Pokemon(**random.choice(self.load_pokemons('pokemon.json')))
-    
         self.show_message(f"Un {self.enemy_pokemon.name} sauvage apparaît!", 2000)
-
+    
         while self.combat_active:
             action = self.player_turn()
 
             if action == "quit":
-                return
+                return False
 
             if action == "attack":
                 damage = self.calculate_damage(self.player_pokemon, self.enemy_pokemon)
@@ -292,11 +308,13 @@ class Combat:
                 
                 if self.player_pokemon.is_fainted():
                     self.show_message(f"{self.player_pokemon.name} est K.O.!", 3000)
-                    pygame.display.flip()
                     pygame.time.delay(1500)
-                    # self.combat_active = False
-                    self.start()
-                    
+                    pygame.display.flip()
+                    new_pokemon = self.run_selection_screen()
+                    if new_pokemon:
+                        self.player_pokemon = new_pokemon
+                        self.show_message(f"{self.player_pokemon.name} est prêt à combattre!", 1500)
+                    continue
 
             elif action == "switch":
                 new_pokemon = self.run_selection_screen()

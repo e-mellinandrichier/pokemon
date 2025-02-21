@@ -1,4 +1,27 @@
 [
     {"name": "Wattwatt", "new_name": "Lainergie", "image":"assets/lainergie.png", "level": 15},
-    {"name": "Lainergie", "new_name": "Pharamp","image": "assets/pharamp.png", "level": 35 }
+    {"name": "Lainergie", "new_name": "Pharamp","image": "assets/pharamp.png", "level": 35 },
+    {"name": "Sabelette", "new_name": "Sablaireau", "image": "assets/sablaireau.png", "level": 22},
+    {"name": "Salamèche", "new_name": "Reptincel", "image": "assets/reptincel.png", "level": 16},
+    {"name": "Reptincel", "new_name": "Dracaufeu", "image": "assets/dracaufeu.png", "level": 36},
+    {"name": "Psychokwak", "new_name": "Akwakwak", "image": "assets/akwakwak.png", "level": 33},
+    {"name": "Aptirini", "new_name": "Apireine", "image": "assets/apireine.png", "level": 21},
+    {"name": "Evoli", "new_name": "Phyllali", "image": "assets/phyllali.png", "level": 21},
+    {"name": "Germignon", "new_name": "Macronium", "image": "assets/macronium.png", "level": 16},
+    {"name": "Macronium", "new_name": "Méganium", "image": "assets/meganium.png", "level": 32},
+    {"name": "Coupenotte", "new_name": "Incisache", "image": "assets/incisache.png", "level": 38},
+    {"name": "Incisache", "new_name": "Tranchodon", "image": "assets/tranchodon.png", "level": 48},
+    {"name": "Poichigeon", "new_name": "Colombeau", "image": "assets/colombeau.png", "level": 21},
+    {"name": "Colombeau", "new_name": "Déflaisan", "image": "assets/deflaisan.png", "level": 32},
+    {"name": "Polarhume", "new_name": "Polagriffe", "image": "assets/polagriffe.png", "level": 37},
+    {"name": "Racaillou", "new_name": "Gravalanch", "image": "assets/gravalanch.png", "level": 25},
+    {"name": "Gravalanch", "new_name": "Grolem", "image": "assets/grolem.png", "level": 35},
+    {"name": "Smogo", "new_name": "Smogogo", "image": "assets/smogogo.png", "level": 35},
+    {"name": "Rondoudou", "new_name": "Grodoudou", "image": "assets/grodoudou.png", "level": 35},
+    {"name": "Tic", "new_name": "Clic", "image": "assets/clic.png", "level": 38},
+    {"name": "Clic", "new_name": "Cliticlic", "image": "assets/cliticlic.png", "level": 49},
+    {"name": "Fantominus", "new_name": "Spectrum", "image": "assets/spectrum.png", "level": 25},
+    {"name": "Spectrum", "new_name": "Ectoplasma", "image": "assets/ectoplasma.png", "level": 35},
+    {"name": "Abra", "new_name": "Kadabra", "image": "assets/kadabra.png", "level": 16},
+    {"name": "Kadabra", "new_name": "Alakazam", "image": "assets/alakazam.png", "level": 36}
 ]

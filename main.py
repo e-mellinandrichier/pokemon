@@ -2,7 +2,6 @@ import pygame
 import sys
 import json
 from combat import Combat
-
 from pokedex import Pokedex
 
 pygame.init()
@@ -42,8 +41,9 @@ def main_menu():
                     combat = Combat(screen)
                     result = combat.start()
                 elif event.key == pygame.K_2:
-                    pokedex = Pokedex()
-                    result = pokedex.show()
+                    combat = Combat(screen)
+                    combat.list_enemy = []
+                    result = combat.start()
                 elif event.key == pygame.K_3:
                     pokedex = Pokedex()
                     pokedex.show()

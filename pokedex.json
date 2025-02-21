@@ -2,13 +2,193 @@
     {
         "name": "Wattwatt",
         "hp": 35,
-        "level": 5,
-        "attack": 52,
+        "level": 6,
+        "attack": 53,
         "defense": 40,
         "types": [
             "electrik"
         ],
         "image": "assets/wattwatt.png",
+        "max_hp": 35
+    },
+    {
+        "name": "Poichigeon",
+        "hp": 44,
+        "level": 5,
+        "attack": 48,
+        "defense": 57,
+        "types": [
+            "vol"
+        ],
+        "image": "assets/poichigeon.png",
+        "max_hp": 44
+    },
+    {
+        "name": "Tenefixe",
+        "hp": 44,
+        "level": 5,
+        "attack": 48,
+        "defense": 65,
+        "types": [
+            "tenebres"
+        ],
+        "image": "assets/tenefixe.png",
+        "max_hp": 44
+    },
+    {
+        "name": "Kicklee",
+        "hp": 44,
+        "level": 5,
+        "attack": 48,
+        "defense": 65,
+        "types": [
+            "combat"
+        ],
+        "image": "assets/kicklee.png",
+        "max_hp": 44
+    },
+    {
+        "name": "Evoli",
+        "hp": 39,
+        "level": 5,
+        "attack": 48,
+        "defense": 50,
+        "types": [
+            "normal"
+        ],
+        "image": "assets/evoli.png",
+        "max_hp": 39
+    },
+    {
+        "name": "Psychokwak",
+        "hp": 44,
+        "level": 6,
+        "attack": 48,
+        "defense": 65,
+        "types": [
+            "eau"
+        ],
+        "image": "assets/psychokwak.png",
+        "max_hp": 44
+    },
+    {
+        "name": "Lainergie",
+        "hp": 35,
+        "level": 35,
+        "attack": 250,
+        "defense": 60,
+        "types": [
+            "electrik"
+        ],
+        "image": "assets/lainergie.png",
+        "max_hp": 35
+    },
+    {
+        "name": "Apitrini",
+        "hp": 44,
+        "level": 5,
+        "attack": 48,
+        "defense": 65,
+        "types": [
+            "insecte"
+        ],
+        "image": "assets/apitrini.png",
+        "max_hp": 44
+    },
+    {
+        "name": "Coupenotte",
+        "hp": 46,
+        "level": 5,
+        "attack": 48,
+        "defense": 65,
+        "types": [
+            "dragon"
+        ],
+        "image": "assets/coupenotte.png",
+        "max_hp": 46
+    },
+    {
+        "name": "Polarhume",
+        "hp": 44,
+        "level": 5,
+        "attack": 48,
+        "defense": 65,
+        "types": [
+            "glace"
+        ],
+        "image": "assets/polarhume.png",
+        "max_hp": 44
+    },
+    {
+        "name": "Abra",
+        "hp": 40,
+        "level": 5,
+        "attack": 38,
+        "defense": 65,
+        "types": [
+            "psy"
+        ],
+        "image": "assets/abra.png",
+        "max_hp": 40
+    },
+    {
+        "name": "Rondoudou",
+        "hp": 44,
+        "level": 5,
+        "attack": 48,
+        "defense": 65,
+        "types": [
+            "fee"
+        ],
+        "image": "assets/rondoudou.png",
+        "max_hp": 44
+    },
+    {
+        "name": "Smogo",
+        "hp": 44,
+        "level": 5,
+        "attack": 48,
+        "defense": 65,
+        "types": [
+            "poison"
+        ],
+        "image": "assets/smogo.png",
+        "max_hp": 44
+    },
+    {
+        "name": "Racaillou",
+        "hp": 44,
+        "level": 5,
+        "attack": 48,
+        "defense": 65,
+        "types": [
+            "roche"
+        ],
+        "image": "assets/racaillou.png",
+        "max_hp": 44
+    },
+    {
+        "name": "Fantominus",
+        "hp": 40,
+        "level": 5,
+        "attack": 38,
+        "defense": 65,
+        "types": [
+            "spectre"
+        ],
+        "image": "assets/fantominus.png",
+        "max_hp": 40
+    },
+    {
+        "name": "Pharamp",
+        "hp": 35,
+        "level": 37,
+        "attack": 450,
+        "defense": 260,
+        "types": [
+            "electrik"
+        ],
+        "image": "assets/pharamp.png",
         "max_hp": 35
     }
 ]
