@@ -1,6 +1,7 @@
 import pygame
 import json
 import random
+import time
 
 pygame.init()
 
@@ -44,7 +45,6 @@ class Pokemon:
         
     def update_pokedex(self):
         try:
-            # Read existing Pokedex
             with open('pokedex.json', 'r') as f:
                 pokedex = json.load(f)
         except (FileNotFoundError, json.JSONDecodeError):
@@ -53,8 +53,6 @@ class Pokemon:
         pokedex[self.name] = {
             'level': self.level,
         }
-
-        # Write back to file
         with open('pokedex.json', 'w') as f:
             json.dump(pokedex, f, indent=2)
 
@@ -73,13 +71,46 @@ class Pokemon:
 
         if possible_evolutions:
             chosen_evolution = random.choice(possible_evolutions)
-            print(chosen_evolution)
             self.evolve(current_pokemon, chosen_evolution)
     
     def evolve(self, current_pokemon, chosen_evolution):
-        current_pokemon.name = chosen_evolution["new_name"]
+        self.animate(current_pokemon, chosen_evolution)
         current_pokemon.image = chosen_evolution["image"]
         current_pokemon.types = chosen_evolution["types"]
+        current_pokemon.name = chosen_evolution["new_name"]
 
     def pokemon_data(self):
         return {"name": self.name, "hp": self.hp, "level": self.level, "attack": self.attack, "defense": self.defense, "types": self.types, "image": self.image, "max_hp": self.max_hp}
+
+    def display_text(self, text):
+        font = pygame.font.Font(None, 36)
+        screen = pygame.display.set_mode((800, 600))
+        text_surface = font.render(text, True, (255, 255, 255))
+        screen.blit(text_surface, (300, 100))
+
+    def animate(self, current_pokemon, chosen_evolution):
+        screen = pygame.display.set_mode((800, 600))
+        screen.fill((0, 0, 0))
+        poke_image = pygame.image.load(current_pokemon.image)
+        self.display_text("Evolution!")
+        screen.blit(poke_image, (200, 150))
+        pygame.display.flip()
+        
+        time.sleep(1)
+
+        for i in range(5):
+            screen.fill((255, 255, 255))
+            pygame.display.flip()
+            time.sleep(0.2)
+            screen.fill((0, 0, 0))
+            pygame.display.flip()
+            time.sleep(0.2)
+
+
+        screen.fill((0, 0, 0))
+        poke_image2 = pygame.image.load(chosen_evolution["image"])
+        screen.blit(poke_image2, (200, 150))
+        pygame.display.flip()
+
+
+        time.sleep(2)
