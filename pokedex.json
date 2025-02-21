@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Wattwatt",
+        "hp": 35,
+        "level": 5,
+        "attack": 52,
+        "defense": 40,
+        "types": [
+            "electrik"
+        ],
+        "image": "assets/wattwatt.png",
+        "max_hp": 35
+    },
+    {
+        "name": "Poichigeon",
+        "hp": 44,
+        "level": 5,
+        "attack": 48,
+        "defense": 57,
+        "types": [
+            "vol"
+        ],
+        "image": "assets/poichigeon.png",
+        "max_hp": 44
+    }
+]
